@@ -18,5 +18,8 @@ if Stylist.all().length() > 1%>
     <button type="submit">Update Stylist</button>
 </form>
 <% end %>
-<a href="/delete_client/<%= @client.id %>" name="_method" value="patch">Delete This Client</a>
+<form class="form-group" action="/delete_client/<%= @client.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete This Client</button>
+</form>
 <p><a href="/">Return to Main Page</a></p>
