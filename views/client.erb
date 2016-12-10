@@ -3,7 +3,7 @@
 <% if @client.stylist_id != 0 %>
   <h3>Current Stylist: <%= @stylist.name %></h3>
 <% end
-if Stylist.all().length() > 0 %>
+if Stylist.all().length() > 1 or (Stylist.all().length() == 1 and @client.stylist_id == 0) %>
 
 <h4>Choose a Different Stylist Below to Update:</h4>
 <form class="form-group" action="/stylist_update/<%= @client.id %>" method="post">
