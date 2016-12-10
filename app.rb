@@ -34,7 +34,7 @@ end
 get('/client/:id') do
   client_id = params.fetch('id').to_i()
   @client = Client.find(client_id)
-  if @client.stylist_id == 0
+  if Stylist.find(@client.stylist_id).equal?(nil)
     @stylist = Stylist.new(:name => "No Stylist Assigned")
   else
     @stylist = Stylist.find(@client.stylist_id())
@@ -52,5 +52,11 @@ end
 delete('/delete_client/:id') do
   client = Client.find(params.fetch('id').to_i())
   client.delete()
+  erb(:index)
+end
+
+delete('/delete_stylist/:id') do
+  stylist = Stylist.find(params.fetch('id').to_i())
+  stylist.delete()
   erb(:index)
 end

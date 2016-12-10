@@ -8,12 +8,19 @@
       <ul class="well">
       <% Stylist.all.each do |stylist| %>
         <li><a href="/stylist/<%= stylist.id %>"><%= stylist.name %></a>
-            <% if @stylist == stylist %>
+          <% if @stylist == stylist %>
+            <form class="form-group" action="/delete_stylist/<%= @stylist.id %>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit">Delete This Stylist</button>
+            </form>
+            <% if @stylist.clients.length() > 0 %>
+              <p><%= @stylist.name() %>'s Clients:</p>
               <ul class="well">
-              <% @stylist.clients.each() do |client| %>
-                <li><a href="/client/<%= client.id %>"><%= client.name %></a></li>
-              <% end %>
-            </ul>
+                <% @stylist.clients.each() do |client| %>
+                  <li><a href="/client/<%= client.id %>"><%= client.name %></a></li>
+                <% end %>
+              </ul>
+            <% end %>
           <% end %>
         </li>
       <% end %>
