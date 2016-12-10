@@ -34,7 +34,11 @@ end
 get('/client/:id') do
   client_id = params.fetch('id').to_i()
   @client = Client.find(client_id)
-  @stylist = Stylist.find(@client.stylist_id())
+  if @client.stylist_id == 0
+    @stylist = Stylist.new(:name => "No Stylist Assigned")
+  else
+    @stylist = Stylist.find(@client.stylist_id())
+  end
   erb(:client)
 end
 

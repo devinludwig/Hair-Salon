@@ -1,11 +1,11 @@
 <h1 class="well">Welcome to Devin's Hair Salon</h1>
 <div class="row">
   <div class="col-md-6">
-    <ul>
       <h2>Stylists:</h2>
       <form action="/new_stylist" method="post">
         <input class="form-group" type="text" name="new_stylist" placeholder="New Stylist">
       </form>
+      <ul class="well">
       <% Stylist.all.each do |stylist| %>
         <li><a href="/stylist/<%= stylist.id %>"><%= stylist.name %></a>
             <% if @stylist == stylist %>
