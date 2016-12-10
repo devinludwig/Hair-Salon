@@ -15,6 +15,18 @@ describe(Stylist) do
     end
   end
 
+    describe('#clients') do
+      it("returns an array of the stylist's clients") do
+        stylist = Stylist.new({:name => "Julia"})
+        stylist.save()
+        client = Client.new({:name => "Blob Trapezoid", :stylist_id => stylist.id()})
+        client1 = Client.new({:name => "Blobby Trapezoid", :stylist_id => stylist.id() + 1})
+        client.save()
+        client1.save()
+        expect(stylist.clients).to(eq([client]))
+      end
+    end
+
   describe('#save') do
     it("saves stylist to database") do
       stylist = Stylist.new({:name => "Blob Trapezoid"})
@@ -43,6 +55,24 @@ describe(Stylist) do
       stylist = Stylist.new({:name => "Blob Trapezoid"})
       stylist1 = Stylist.new({:name => "Blob Trapezoid"})
       expect(stylist1).to(eq(stylist))
+    end
+  end
+
+  describe("#update") do
+    it("lets you update stylist's name in the database") do
+      stylist = Stylist.new({:name => "Blob", :stylist_id => 1})
+      stylist.save()
+      stylist.update({:name => "Boobie"})
+      expect(stylist.name()).to(eq("Boobie"))
+    end
+  end
+
+  describe("#delete") do
+    it("deletes stylist from the database") do
+      stylist = Stylist.new({:name => "Blob"})
+      stylist.save()
+      stylist.delete()
+      expect(Stylist.all()).to(eq([]))
     end
   end
 end

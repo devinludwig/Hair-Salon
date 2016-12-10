@@ -2,12 +2,40 @@
 <div class="row">
   <div class="col-md-6">
     <ul>
-
+      <h2>Stylists:</h2>
+      <form action="/new_stylist" method="post">
+        <input class="form-group" type="text" name="new_stylist" placeholder="New Stylist">
+      </form>
+      <% Stylist.all.each do |stylist| %>
+        <li><a href="/stylist/<%= stylist.id %>"><%= stylist.name %></a>
+            <% if @stylist == stylist %>
+              <ul class="well">
+              <% @stylist.clients.each() do |client| %>
+                <li><a href="/client/<%= client.id %>"><%= client.name %></a></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
   <div class="col-md-6">
-    <ul>
-      
+    <h2>Clients:</h2>
+    <form class="form-group" action="/new_client" method="post">
+      <label for="new_client_stylist">Pick a Stylist for New Client:</label>
+      <select name="new_client_stylist">
+        <option value='0'>Do not assign stylist</option>
+        <% Stylist.all.each do |stylist| %>
+        <option value="<%= stylist.id %>"><%= stylist.name %></option>
+        <% end %>
+      </select>
+      <br>
+      <input class="form-group" type="text" name="new_client" placeholder="New Client">
+    </form>
+    <ul class="well">
+      <% Client.all.each do |client| %>
+        <li><a href="/client/<%= client.id %>"><%= client.name %></a></li>
+      <% end %>
     </ul>
   </div>
 </div>

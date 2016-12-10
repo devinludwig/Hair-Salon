@@ -52,4 +52,22 @@ describe(Client) do
       expect(client1).to(eq(client))
     end
   end
+
+  describe("#update") do
+    it("lets you update client's stylist in the database") do
+      client = Client.new({:name => "Blob", :stylist_id => 1})
+      client.save()
+      client.update({:stylist_id => 2})
+      expect(client.stylist_id()).to(eq(2))
+    end
+  end
+
+  describe("#delete") do
+    it("deletes client from the database") do
+      client = Client.new({:name => "Blob", :stylist_id => 1})
+      client.save()
+      client.delete()
+      expect(Client.all()).to(eq([]))
+    end
+  end
 end

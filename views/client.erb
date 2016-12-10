@@ -1,0 +1,22 @@
+<h1 class="well">Devin's Hair Salon</h1>
+<h2>Client: <%= @client.name %></h2>
+<% if @client.stylist_id != 0 %>
+  <h3>Current Stylist: <%= @stylist.name %></h3>
+<% end
+if Stylist.all().length() > 1%>
+
+<h4>Choose a Different Stylist Below to Update:</h4>
+<form class="form-group" action="/stylist_update/<%= @client.id %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <select name="stylist_update">
+    <% Stylist.all.each() do |stylist|
+      if stylist != @stylist%>
+        <option value="<%= stylist.id %>"><%= stylist.name() %></option>
+      <% end
+    end %>
+  </select>
+    <button type="submit">Update Stylist</button>
+</form>
+<% end %>
+<a href="/delete_client/<%= @client.id %>" name="_method" value="patch">Delete This Client</a>
+<p><a href="/">Return to Main Page</a></p>

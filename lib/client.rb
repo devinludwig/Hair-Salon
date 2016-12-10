@@ -12,13 +12,24 @@ class Client
     @id = result.first.fetch('id').to_i()
   end
 
+  def update(attributes)
+    @stylist_id = attributes.fetch(:stylist_id)
+    @id = self.id()
+    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM clients WHERE id = #{@id};")
+  end
+
   define_singleton_method(:all) do
     returned_clients = DB.exec("SELECT * FROM clients;")
     clients = []
     returned_clients.each() do |client|
       name = client.fetch('name')
       id = client.fetch('id').to_i()
-      clients.push(Client.new({:name => name, :id => id}))
+      stylist_id = client.fetch('stylist_id').to_i()
+      clients.push(Client.new({:name => name, :id => id, :stylist_id => stylist_id}))
     end
     clients.sort_by!{|i| i.name()}
   end
