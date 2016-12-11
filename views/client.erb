@@ -8,7 +8,7 @@ if Stylist.all().length() > 1 or (Stylist.all().length() == 1 and @client.stylis
 <h4>Choose a Different Stylist Below to Update:</h4>
 <form class="form-group" action="/stylist_update/<%= @client.id %>" method="post">
   <input name="_method" type="hidden" value="patch">
-  <select name="stylist_update">
+  <select name="stylist_update" id="stylist_update">
     <% Stylist.all.each() do |stylist|
       if stylist != @stylist%>
         <option value="<%= stylist.id %>"><%= stylist.name() %></option>
