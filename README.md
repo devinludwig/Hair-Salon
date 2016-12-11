@@ -1,6 +1,6 @@
-# _Dictionary Builder_
+# _Hair Salon Manager_
 
-#### _A page to save words and add definitions., 12-9-2016_
+#### _An app to save and edit clients and stylists for a hair salon., 12-9-2016_
 
 #### By _**Devin Ludwig**_
 
